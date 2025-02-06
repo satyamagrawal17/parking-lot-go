@@ -3,5 +3,8 @@ package parkingLot
 import "testing"
 
 func TestParkingLotReturnNoExceptionWhenCreateParkingLotWithFiveSlots(t *testing.T) {
-	var parkingLot ParkingLot = newParkingLot(5)
+	parkingLot, _ := NewParkingLot(5)
+	if parkingLot == nil {
+		t.Errorf("Expected parkingLot instance, got nil")
+	}
 }
