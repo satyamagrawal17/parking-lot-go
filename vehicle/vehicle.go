@@ -3,8 +3,8 @@ package vehicle
 import "errors"
 
 type Vehicle struct {
-	RegistrationNumber string
-	Color              Color
+	registrationNumber string
+	color              Color
 }
 
 func NewVehicle(registrationNumber string, color Color) (*Vehicle, error) {
@@ -15,7 +15,7 @@ func NewVehicle(registrationNumber string, color Color) (*Vehicle, error) {
 		return nil, errors.New("Invalid color")
 	}
 	return &Vehicle{
-		RegistrationNumber: registrationNumber,
-		Color:              color,
+		registrationNumber: registrationNumber,
+		color:              color,
 	}, nil
 }
