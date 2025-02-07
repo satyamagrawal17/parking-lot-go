@@ -21,6 +21,7 @@ func TestParkingLotReturnExceptionWhenCreateParkingLotWithMinus5Slots(t *testing
 	assert.Error(t, err)
 }
 
+// Test for park method
 func TestParkReturnNoExceptionWhenParkedVehicle(t *testing.T) {
 	myParkingLot, _ := NewParkingLot(5)
 	assert.NotNil(t, myParkingLot)
@@ -48,4 +49,16 @@ func TestParkMethodReturnExceptionWhenVehicleIsNull(t *testing.T) {
 	assert.NotNil(t, myParkingLot)
 	_, err := myParkingLot.Park(nil)
 	assert.Error(t, err)
+}
+
+// Test for unPark method
+func TestUnParkMethodReturnNoExceptionWhenVehicleIsUnParked(t *testing.T) {
+	myParkingLot, _ := NewParkingLot(5)
+	assert.NotNil(t, myParkingLot)
+	myVehicle, _ := vehicle.NewVehicle("KA-01-HH-1234", vehicle.RED)
+	assert.NotNil(t, myVehicle)
+	myTicket, _ := myParkingLot.Park(myVehicle)
+	assert.NotNil(t, myTicket)
+	err := myParkingLot.UnPark(myTicket)
+	assert.Nil(t, err)
 }

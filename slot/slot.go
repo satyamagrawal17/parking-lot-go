@@ -22,3 +22,11 @@ func (s *Slot) Park(v *vehicle.Vehicle) error {
 	s.vehicle = v
 	return nil
 }
+
+func (s *Slot) UnPark() error {
+	if s.vehicle == nil {
+		return errors.New("slot is already empty")
+	}
+	s.vehicle = nil
+	return nil
+}

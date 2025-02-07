@@ -27,6 +27,15 @@ func NewParkingLot(capacity int) (*ParkingLot, error) {
 	}, nil
 }
 
+func (p *ParkingLot) findNearestSlot() *slot.Slot {
+	for _, s := range p.slots {
+		if s != nil {
+			return s
+		}
+	}
+	return nil
+}
+
 func (p *ParkingLot) Park(v *vehicle.Vehicle) (*ticket.Ticket, error) {
 	if v == nil {
 		return nil, errors.New("invalid vehicle")
@@ -49,11 +58,22 @@ func (p *ParkingLot) Park(v *vehicle.Vehicle) (*ticket.Ticket, error) {
 	return nil, errors.New("parking lot is full")
 }
 
-func (p *ParkingLot) findNearestSlot() *slot.Slot {
-	for _, s := range p.slots {
-		if s != nil {
-			return s
-		}
+func (p *ParkingLot) UnPark(t *ticket.Ticket) error {
+	if t == nil {
+		return errors.New("invalid ticket")
 	}
+	validErr := t.ValidateAndUnPark()
+	if validErr != nil {
+		return errors.New("invalid ticket")
+	}
+	parkedSlot, ok := p.ticketToSlotMapper[t]
+	if !ok {
+		return errors.New("invalid ticket")
+	}
+	unParkErr := parkedSlot.UnPark()
+	if unParkErr != nil {
+		return unParkErr
+	}
+	delete(p.ticketToSlotMapper, t)
 	return nil
 }

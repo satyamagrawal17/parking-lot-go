@@ -23,3 +23,12 @@ func NewTicket(vehicle *vehicle.Vehicle, slot *slot.Slot) (*Ticket, error) {
 		slot:    slot,
 	}, nil
 }
+
+func (t *Ticket) ValidateAndUnPark() error {
+	if t.vehicle == nil || t.slot == nil {
+		return errors.New("invalid ticket")
+	}
+	t.vehicle = nil
+	t.slot = nil
+	return nil
+}
