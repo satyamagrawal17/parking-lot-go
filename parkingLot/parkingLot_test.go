@@ -42,3 +42,10 @@ func TestParkMethodReturnExceptionWhenSlotsAreFull(t *testing.T) {
 	_, errSecondTicket := myParkingLot.Park(myVehicle)
 	assert.Error(t, errSecondTicket)
 }
+
+func TestParkMethodReturnExceptionWhenVehicleIsNull(t *testing.T) {
+	myParkingLot, _ := NewParkingLot(5)
+	assert.NotNil(t, myParkingLot)
+	_, err := myParkingLot.Park(nil)
+	assert.Error(t, err)
+}
