@@ -62,3 +62,23 @@ func TestUnParkMethodReturnNoExceptionWhenVehicleIsUnParked(t *testing.T) {
 	err := myParkingLot.UnPark(myTicket)
 	assert.Nil(t, err)
 }
+
+func TestUnParkMethodReturnExceptionWhenTicketIsNull(t *testing.T) {
+	myParkingLot, _ := NewParkingLot(5)
+	assert.NotNil(t, myParkingLot)
+	err := myParkingLot.UnPark(nil)
+	assert.Error(t, err)
+}
+
+func TestUnParkMethodReturnExceptionWhenTicketIsInvalid(t *testing.T) {
+	myParkingLot, _ := NewParkingLot(5)
+	assert.NotNil(t, myParkingLot)
+	myVehicle, _ := vehicle.NewVehicle("KA-01-HH-1234", vehicle.RED)
+	assert.NotNil(t, myVehicle)
+	myTicket, _ := myParkingLot.Park(myVehicle)
+	assert.NotNil(t, myTicket)
+	unParkErr := myParkingLot.UnPark(myTicket)
+	assert.Nil(t, unParkErr)
+	secUnParkErr := myParkingLot.UnPark(myTicket)
+	assert.Error(t, secUnParkErr)
+}
