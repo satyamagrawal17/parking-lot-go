@@ -13,10 +13,10 @@ type Ticket struct {
 
 func NewTicket(vehicle *vehicle.Vehicle, slot *slot.Slot) (*Ticket, error) {
 	if vehicle == nil {
-		return nil, errors.New("Invalid vehicle")
+		return nil, errors.New("invalid vehicle")
 	}
 	if slot == nil {
-		return nil, errors.New("Invalid slot")
+		return nil, errors.New("invalid slot")
 	}
 	return &Ticket{
 		vehicle: vehicle,

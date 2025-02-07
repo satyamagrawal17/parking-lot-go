@@ -17,7 +17,7 @@ func NewSlot() *Slot {
 
 func (s *Slot) Park(v *vehicle.Vehicle) error {
 	if s.vehicle != nil {
-		return errors.New("Slot is already occupied")
+		return errors.New("slot is already occupied")
 	}
 	s.vehicle = v
 	return nil
